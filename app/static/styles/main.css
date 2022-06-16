@@ -288,7 +288,6 @@ section {
     border-radius: 50%;
     max-width: 30%;
     max-height: 300px;
-    transform: translateX(-80px);
 }
 
 .intro h1 {
@@ -373,7 +372,7 @@ About/Edu Section Styling
 
 .about-edu-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -383,7 +382,7 @@ About/Edu Section Styling
     background: none;
     border: 2px solid white;
     width: 30%;
-    height: 70%;
+    min-height: 70%;
     border-radius: 10px;
     text-align: center;
 }
@@ -393,10 +392,11 @@ About/Edu Section Styling
     text-align: center;
 }
 
-.about p, .activites {
+.about p,
+.activites {
     font-size: 20px;
-    margin-left: 30px;
-    margin-right: 30px;
+    padding: 5%;
+    margin: 0;
 }
 
 .edu img {
@@ -430,14 +430,14 @@ About/Edu Section Styling
     font-weight: lighter;
 }
 
-.about:hover,
+/* .about:hover,
 .edu:hover,
 .experiences:hover,
 .skills:hover,
 .hobbies:hover {
     transform: scale(1.05);
     transition: all 1s ease;
-}
+} */
 
 /* 
 //////////////////////////////////////////////////////////////////////////////
@@ -505,7 +505,7 @@ Projects Section Styling
     background: none;
     border: 2px solid white;
     height: 70%;
-    width: 70%;
+    width: 80%;
     border-radius: 10px;
     padding: 50px 0;
 }
@@ -525,7 +525,7 @@ Projects Section Styling
 
 .first,
 .second {
-    height: 425px;
+    min-height: 70%;
     color: white;
     background: none;
     border: 2px solid white;
@@ -615,4 +615,79 @@ section div {
 section div.hide-card {
     opacity: 0;
     transform: translateY(20px);
+}
+
+
+/* 
+//////////////////////////////////////////////////////////////////////////////
+Responsiveness
+*/
+
+@media screen and (max-width: 1150px) {
+
+    .slide-menu .profile-pic img {
+        width: 80%;
+    }
+
+    .about,
+    .edu {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+
+    .about-edu-container {
+        flex-direction: column;
+    }
+
+    .about,
+    .edu {
+        scroll-snap-align: start;
+        overflow-x: hidden;
+        width: 90%;
+        min-height: 30%;
+    }
+
+    .about p,
+    .edu p {
+        font-size: 1.1rem;
+    }
+
+    .experiences,
+    .skills-container .skills,
+    .hobbies-container .hobbies {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 890px) {
+
+    .first,
+    .second {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+
+    .about h2,
+    .edu h2 {
+        margin: 10px 0 0;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    .about h2,
+    .edu h2 {
+        font-size: 1.4rem;
+    }
+
+    .about p,
+    .edu p {
+        font-size: 0.9rem;
+    }
+
 }

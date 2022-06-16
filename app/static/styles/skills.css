@@ -32,6 +32,8 @@
 svg.skill-imgs {
     overflow: visible;
     padding: 20px 0;
+    aspect-ratio: 700/378;
+    width: 95%;
 }
 
 svg.skill-imgs g {
