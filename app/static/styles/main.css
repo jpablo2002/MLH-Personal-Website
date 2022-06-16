@@ -623,8 +623,8 @@ Responsiveness
 @media screen and (max-width: 1150px) {
 
     .slide-menu {
-        width: 30%;
         right: -30%;
+        width: 30%;
     }
 
     .about,
@@ -675,15 +675,17 @@ Responsiveness
     #profile {
         flex-direction: column-reverse;
         justify-content: center;
+        text-align: center;
     }
 
     #profile img {
         max-width: 80%;
     }
 
-    #profile div {
-        padding-left: 10%;
+    #profile .socials {
+        margin: auto;
     }
+
 }
 
 @media screen and (max-width: 740px) {
