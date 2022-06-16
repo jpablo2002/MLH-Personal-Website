@@ -83,6 +83,7 @@ Header/Nav Styling
 
 nav {
     width: 100%;
+    min-height: 5%;
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -654,28 +655,38 @@ Responsiveness
         font-size: 1.1rem;
     }
 
-    .experiences,
-    .skills-container .skills,
-    .hobbies-container .hobbies {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 890px) {
-
-    .first,
-    .second {
-        width: 45%;
-    }
-}
-
-@media screen and (max-width: 860px) {
-
     .about h2,
     .edu h2 {
         margin: 10px 0 0;
     }
 
+
+    .experiences,
+    .skills-container .skills,
+    .hobbies-container .hobbies,
+    .projects-container div.projects {
+        width: 90%;
+    }
+
+    .first,
+    .second {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    #profile {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    #profile img {
+        max-width: 80%;
+    }
+
+    #profile div {
+        padding-left: 10%;
+    }
 }
 
 @media screen and (max-width: 420px) {
@@ -688,6 +699,10 @@ Responsiveness
     .about p,
     .edu p {
         font-size: 0.9rem;
+    }
+
+    .menu {
+        display: none;
     }
 
 }
