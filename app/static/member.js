@@ -51,12 +51,6 @@ sections.forEach((section) => {
 
 ////////////////////////////////////////////////////////////
 // Map
-const map = L.map('map').setView([40, 0], 2.2);
-
-L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
 const colours = {
     "juan": "violet",
     "noah": "blue",
@@ -74,6 +68,8 @@ const memberIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
+const map = L.map('map').setView([40, 0], 2.2);
+
 fetch(`/visited/${member}`)
     .then((res) => res.json())
     .then((data) => {
@@ -81,5 +77,8 @@ fetch(`/visited/${member}`)
         visited.forEach((place) => {
             L.marker(place[1], { icon: memberIcon }).addTo(map)
         })
+        L.tileLayer(`https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=${data['api_key']}`, {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
     })
     .catch(err => console.log(err))

@@ -17,3 +17,8 @@
     font-size: 50px;
     text-align: center;
 }
+
+.hobbies img {
+    aspect-ratio: 700/378;
+    width: 100%;
+}
