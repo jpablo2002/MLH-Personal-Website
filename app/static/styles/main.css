@@ -199,9 +199,7 @@ nav img {
 
 .slide-menu {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 40px 0 0 0;
     width: 20%;
     top: 0;
     right: -20%;
@@ -212,14 +210,12 @@ nav img {
 }
 
 .slide-menu .profile-pic {
-    padding: 25% 10% 10% 10%;
     text-align: center;
-    border-top: 25% solid #292930;
 }
 
 .slide-menu .profile-pic img {
-    height: 20%;
-    width: 70%;
+    width: 20vh;
+    height: auto;
     border-radius: 50%;
 }
 
@@ -626,8 +622,9 @@ Responsiveness
 
 @media screen and (max-width: 1150px) {
 
-    .slide-menu .profile-pic img {
-        width: 80%;
+    .slide-menu {
+        width: 30%;
+        right: -30%;
     }
 
     .about,
@@ -689,6 +686,31 @@ Responsiveness
     }
 }
 
+@media screen and (max-width: 740px) {
+    .slide-menu .profile-pic img {
+        width: 0;
+        height: 0;
+    }
+
+    .slide-menu .nav__link {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .experiences h2 {
+        font-size: 1.5rem;
+    }
+
+    .experiences p {
+        font-size: 1.3rem;
+    }
+
+    .experiences li {
+        font-size: 1rem;
+    }
+}
+
 @media screen and (max-width: 420px) {
 
     .about h2,
@@ -704,5 +726,4 @@ Responsiveness
     .menu {
         display: none;
     }
-
 }
