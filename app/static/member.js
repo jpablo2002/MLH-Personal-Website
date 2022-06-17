@@ -68,17 +68,64 @@ const memberIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
-const map = L.map('map').setView([40, 0], 2.2);
+const map = L.map('map', { scrollWheelZoom: false }).setView([40, 0], 2.2);
 
 fetch(`/visited/${member}`)
     .then((res) => res.json())
     .then((data) => {
         visited = data.visited;
         visited.forEach((place) => {
-            L.marker(place[1], { icon: memberIcon }).addTo(map)
+            L.marker(place[1], { icon: memberIcon })
+                .addTo(map)
+                .bindPopup(
+                    L.popup({
+                        maxWidth: 250,
+                        minWidth: 100,
+                    })
+                )
+                .setPopupContent(
+                    `
+                <div class="location-card" style="background-image: url(../static/img/travel-images/${place[0].toLowerCase()}-img.jpg);">
+                <h3>
+                    ${place[0]}
+                </h3>
+                <div class="location-info">
+                    <p>
+                        I visited ${place[0]}.
+                    </p>
+                </div>
+                </div>`
+                )
         })
         L.tileLayer(`https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=${data['api_key']}`, {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        document.querySelector('.leaflet-pane.leaflet-popup-pane')?.addEventListener('click', event => {
+            event.preventDefault();
+        });
+
     })
     .catch(err => console.log(err))
+
+
+// Typewriter
+let text = document.getElementById('typewriter-text');
+
+setTimeout(() => {
+    let typewriter = new Typewriter(text, {
+        loop: true
+    });
+
+    typewriter
+        .typeString('UofT CS Student')
+        .pauseFor(2000)
+        .deleteAll()
+        .typeString('Web Developer')
+        .pauseFor(2000)
+        .deleteAll()
+        .typeString('MLH Fellow')
+        .pauseFor(2000)
+        .deleteAll()
+        .start();
+}, 3000)
