@@ -181,31 +181,39 @@
 {% endblock %}
 
 {% block first %}
-<img src="../static/img/project-images/juan-project1.jpg" alt="weather app image" class="project-image">
-<h3>
-    Your Study Space
-</h3>
-<p>
-    Users can log in, save tasks, start a timer, see local weather, and listen to music. Created using CSS, React,
-    Node.js, Express and MongoDB.
-</p>
-<a href="https://github.com/jpablo2002/Your-Study-Space" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url( ../static/img/project-images/juan-project-two.jpg);">
+    <h3>
+        Spacestagram Web App
+    </h3>
+    <div class="project-info">
+        <p>
+            Application showing picture from NASA's Picture of the Day API. Created front-end using HTML/CSS, and
+            back-end with
+            Node.js and Express.
+        </p>
+        <div class="button">
+            <a href="https://github.com/jpablo2002/Spacestagram" target="_blank" class="project-link">See code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block second %}
-<img src="../static/img/project-images/juan-project-two.jpg" alt="weather app image" class="project-image">
-<h3>
-    Spacestagram Web App
-</h3>
-<p>
-    Application showing picture from NASA's Picture of the Day API. Created front-end using HTML/CSS, and back-end with
-    Node.js and Express.
-</p>
-<a href="https://github.com/jpablo2002/Spacestagram" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url(../static/img/project-images/juan-project1.jpg);">
+    <h3>
+        Your Study Space
+    </h3>
+    <div class="project-info">
+        <p>
+            Users can log in, save tasks, start a timer, see local weather, and listen to music. Created using CSS,
+            React,
+            Node.js, Express and MongoDB.
+        </p>
+        <div class="button">
+            <a href="https://github.com/jpablo2002/Your-Study-Space" target="_blank" class="project-link">See code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block experiences %}

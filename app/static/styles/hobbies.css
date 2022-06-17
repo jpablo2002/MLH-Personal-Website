@@ -8,7 +8,7 @@
     color: white;
     background: none;
     border: 2px solid white;
-    width: 70%;
+    width: 65%;
     border-radius: 10px;
     padding-bottom: 25px;
 }
@@ -19,6 +19,6 @@
 }
 
 .hobbies img {
-    aspect-ratio: 700/378;
+    height: auto;
     width: 100%;
 }

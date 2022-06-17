@@ -163,29 +163,36 @@
 {% endblock %}
 
 {% block first %}
-<img src="../static/img/project-images/weather-app.jpg" alt="weather app image" class="project-image">
-<h3>
-    Weather App
-</h3>
-<p>
-    Application showing global weather data from different major cities. Designed the interface with SwiftUI.
-</p>
-<a href="https://github.com/noahromo/Weather" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url(../static/img/project-images/weather-app.jpg);">
+    <h3>
+        Weather App
+    </h3>
+    <div class="project-info">
+        <p>
+            Application showing global weather data from different major cities. Designed the interface with SwiftUI.
+        </p>
+        <div class="button">
+            <a href="https://github.com/noahromo/Weather" target="_blank" class="project-link">See code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block second %}
-<img src="../static/img/project-images/simon-says.jpg" alt="weather app image" class="project-image">
-<h3>
-    Simon Says
-</h3>
-<p>
-    Developed a fun web-based game that resembles the classic Simon Says game using HTML, CSS, and JavaScript.
-</p>
-<a href="https://github.com/noahromo/LightAndSoundMemoryGame" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url(../static/img/project-images/simon-says.jpg);">
+    <h3>
+        Simon Says
+    </h3>
+    <div class="project-info">
+        <p>
+            Developed a fun web-based game that resembles the classic Simon Says game using HTML, CSS, and JavaScript.
+        </p>
+        <div class="button">
+            <a href="https://github.com/noahromo/LightAndSoundMemoryGame" target="_blank" class="project-link">See
+                code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block experiences %}

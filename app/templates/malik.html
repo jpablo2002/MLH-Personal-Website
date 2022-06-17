@@ -185,31 +185,39 @@
 
 
 {% block first %}
-<img src="../static/img/project-images/bowling.jpg" alt="weather app image" class="project-image">
-<h3>
-    Sched-U-Bowl
-</h3>
-<p>
-    Built a bowling alley reservation system designed to take the stress out of planning a bowling session, using the
-    Calendly API and MongoDB.
-</p>
-<a href="https://github.com/malbaker/bowling-demo" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url(../static/img/project-images/bowling.jpg);">
+    <h3>
+        Sched-U-Bowl
+    </h3>
+    <div class="project-info">
+        <p>
+            Built a bowling alley reservation system designed to take the stress out of planning a bowling session,
+            using the
+            Calendly API and MongoDB.
+        </p>
+        <div class="button">
+            <a href="https://github.com/malbaker/bowling-demo" target="_blank" class="project-link">See code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block second %}
-<img src="../static/img/project-images/dotfiles.jpg" alt="weather app image" class="project-image">
-<h3>
-    Dotfiles
-</h3>
-<p>
-    Dotfiles contains shell scripts for frequently used terminal operations, and custom configurations for applications
-    within Linux.
-</p>
-<a href="https://github.com/malbaker/dotfiles" target="_blank" class="project-link">
-    See Code
-</a>
+<div class="project-card" style="background-image: url(../static/img/project-images/dotfiles.jpg);">
+    <h3>
+        Dotfiles
+    </h3>
+    <div class="project-info">
+        <p>
+            Dotfiles contains shell scripts for frequently used terminal operations, and custom configurations for
+            applications
+            within Linux.
+        </p>
+        <div class="button">
+            <a href="https://github.com/malbaker/dotfiles" target="_blank" class="project-link">See code!</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block experiences %}
