@@ -381,7 +381,10 @@ About/Edu Section Styling
     width: 30%;
     min-height: 70%;
     border-radius: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-edu-container h2 {
@@ -394,6 +397,7 @@ About/Edu Section Styling
     font-size: 20px;
     padding: 5%;
     margin: 0;
+    line-height: 120%;
 }
 
 .edu img {
@@ -426,15 +430,6 @@ About/Edu Section Styling
     font-size: 14px;
     font-weight: lighter;
 }
-
-/* .about:hover,
-.edu:hover,
-.experiences:hover,
-.skills:hover,
-.hobbies:hover {
-    transform: scale(1.05);
-    transition: all 1s ease;
-} */
 
 /* 
 //////////////////////////////////////////////////////////////////////////////
