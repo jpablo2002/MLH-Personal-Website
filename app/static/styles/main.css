@@ -244,6 +244,11 @@ nav img {
     padding-left: 10%;
 }
 
+.slide-menu a img {
+    height: 100%;
+    width: 10%;
+}
+
 .slide-menu a span {
     margin-left: 10%;
 }
