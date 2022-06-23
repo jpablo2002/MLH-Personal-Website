@@ -96,19 +96,6 @@ nav {
     border-bottom: 2px solid white;
 }
 
-nav img {
-    height: 60px;
-}
-
-.nav-logo img {
-    width: 200px;
-}
-
-.nav-logo {
-    display: inline-block;
-    transform: translateX(-70%);
-}
-
 .members {
     display: flex;
     justify-content: left;
@@ -561,9 +548,9 @@ Projects Section Styling
 }
 
 .projects-timeline p {
-    font-size: 18px;
+    font-size: 1.1rem;
     text-align: center;
-    padding: 0 5%;
+    padding: 0 4%;
 }
 
 .projects-timeline .button {
@@ -583,8 +570,8 @@ Projects Section Styling
     position: relative;
     display: inline-block;
     z-index: 1;
-    width: 100%;
-    padding: 10px 5px;
+    width: 90%;
+    padding: 5% 5%;
     text-decoration: none;
     color: white;
 }
@@ -607,10 +594,11 @@ Projects Section Styling
 
 .project-info {
     position: absolute;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    padding-top: calc(5% + 19px);
     text-align: center;
     height: 100%;
     top: 100%;
@@ -625,9 +613,8 @@ Projects Section Styling
 }
 
 .project-card:hover h3 {
-    top: 0;
+    top: 5%;
     z-index: 1;
-    margin: 5% 0;
 }
 
 .project-card:hover h3::after {

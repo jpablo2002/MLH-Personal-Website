@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap%27');
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1be;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(96, 96, 96);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(64, 64, 64);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+    /* Changed again - Noah */
+    font-family: 'Share Tech', sans-serif;
+}
+
+body {
+    background-image: url('../img/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Share Tech", serif;
+    margin: 0;
+}
+
+h1 {
+    color: #ffffff;
+    margin: 0;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#timeline {
+    padding: 4% 0;
+}
+
+.timeline-post-section {
+    width: 50vw;
+    height: auto;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.timeline-post {
+    width: 70%;
+    background-color: #ededed;
+    padding: 5%;
+    border-radius: 12px;
+    box-shadow: 10px 10px rgba(202, 202, 202, 0.622);
+}
+
+.timeline-post-section.left {
+    border-right: 2px solid #ffffff;
+    margin-right: 50%;
+}
+
+.timeline-post-section.right {
+    border-left: 2px solid #ffffff;
+    margin-left: 50%;
+}
+
+.timeline-post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*
+//////////////////////////////////////////////////////////////////////////////
+Header/Nav Styling
+*/
+
+nav {
+    width: 100%;
+    min-height: 5%;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    background-color: #000000;
+    /* changed background */
+    font-family: "Roboto", serif;
+    font-weight: 700 !important;
+    border-bottom: 2px solid white;
+}
+
+.members {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.members a {
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    display: flex;
+    padding: 0px 25px;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease;
+    font-size: 1rem;
+}
+
+.members a:hover {
+    background-color: rgba(102, 102, 102, 0.9);
+}
+
+/*
+//////////////////////////////////////////////////////////////////////////////
+Post Form Styling
+*/
+
+.post-form {
+    width: 40%;
+    background-color: #ededed;
+    padding: 3%;
+    border-radius: 12px;
+    margin: auto;
+    margin-bottom: 20px;
+    color: #000000;
+    box-shadow: 10px 10px rgba(202, 202, 202, 0.622);
+}
+
+#submit-post {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    color: #000000;
+    background: none;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 30px;
+    width: 70px;
+}
+
+#submit-post span {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    width: 100%;
+    text-decoration: none;
+    color: #000000;
+}
+
+#submit-post:before {
+    z-index: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -100%;
+    top: 0;
+    background-color: rgba(164, 219, 244, 0.87);
+    transition: all 1s ease;
+}
+
+#submit-post:hover::before {
+    left: 0;
+}
+
+.post-form input {
+    border: none;
+    border-radius: 5px;
+    width: 30%;
+    height: 1.4rem;
+    font-size: 0.9rem;
+    margin-left: 4px;
+}
+
+.post-form textarea {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+input#name {
+    margin-right: auto;
+}
+
+.name-email {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+}
