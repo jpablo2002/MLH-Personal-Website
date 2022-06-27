@@ -3,6 +3,7 @@
 let menuOpen = false;
 const burgerButton = document.querySelector('.burger-button');
 const menu = document.querySelector('.menu');
+let lastLink = document.querySelector('.selected')
 
 burgerButton.addEventListener('click', () => {
     menu.classList.toggle('open');
@@ -11,9 +12,12 @@ burgerButton.addEventListener('click', () => {
 const slideMenu = document.querySelector('.slide-menu');
 
 slideMenu.addEventListener('click', (e) => {
-    e.preventDefault();
     const link = e.target.closest('li');
     if (link?.classList.contains('nav__link')) {
+        lastLink && lastLink.classList.remove('selected');
+        lastLink = link;
+        link.classList.add('selected');
+        e.preventDefault();
         const id = link.querySelector('a').getAttribute('href');
         document.querySelector(id).scrollIntoView({
             behavior: 'smooth'
@@ -51,17 +55,12 @@ sections.forEach((section) => {
 
 ////////////////////////////////////////////////////////////
 // Map
-const colours = {
-    "juan": "violet",
-    "noah": "blue",
-    "malik": "orange"
-}
+
 
 let visited;
-const member = window.location.href.split('/').slice(-1)[0];
 
 const memberIcon = new L.Icon({
-    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${colours[member]}.png`,
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png`,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -70,7 +69,7 @@ const memberIcon = new L.Icon({
 
 const map = L.map('map', { scrollWheelZoom: false }).setView([40, 0], 2.2);
 
-fetch(`/visited/${member}`)
+fetch(`/visited`)
     .then((res) => res.json())
     .then((data) => {
         visited = data.visited;
