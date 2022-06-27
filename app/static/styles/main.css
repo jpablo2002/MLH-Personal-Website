@@ -85,36 +85,15 @@ nav {
     width: 100%;
     min-height: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     position: fixed;
     z-index: 5;
     top: 0;
-    background-color: #000000;
+    background: #04121f;
     /* changed background */
     font-family: "Roboto", serif;
     font-weight: 700 !important;
     border-bottom: 2px solid white;
-}
-
-.members {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.members a {
-    text-decoration: none;
-    color: white;
-    height: 100%;
-    display: flex;
-    padding: 0px 25px;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.5s ease;
-}
-
-.members a:hover {
-    background-color: rgba(102, 102, 102, 0.9);
 }
 
 .slide-menu ul {
@@ -191,7 +170,7 @@ nav {
     top: 0;
     right: -20%;
     color: white;
-    background-color: #000000;
+    background-color: #58009b;
     transition: right 0.5s ease;
     height: 100vh;
 }
@@ -241,7 +220,11 @@ nav {
 }
 
 .slide-menu li:not(:first-child):hover {
-    background-color: rgb(99, 94, 94);
+    background-color: rgb(192, 129, 223);
+}
+
+.slide-menu li.selected {
+    background-color: rgb(192, 129, 223);
 }
 
 .menu.open .slide-menu {
