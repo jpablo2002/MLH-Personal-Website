@@ -575,11 +575,7 @@ Projects Section Styling
 
 .project-info {
     position: absolute;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-    padding-top: calc(5% + 19px);
+    padding-top: calc(10% + 19px);
     text-align: center;
     height: 100%;
     top: 100%;
