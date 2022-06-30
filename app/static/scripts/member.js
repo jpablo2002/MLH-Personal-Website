@@ -1,9 +1,7 @@
 ////////////////////////////////////////////////////////////
 // Hamburger Nav Menu
-let menuOpen = false;
 const burgerButton = document.querySelector('.burger-button');
 const menu = document.querySelector('.menu');
-let lastLink = document.querySelector('.selected')
 
 burgerButton.addEventListener('click', () => {
     menu.classList.toggle('open');
@@ -14,9 +12,6 @@ const slideMenu = document.querySelector('.slide-menu');
 slideMenu.addEventListener('click', (e) => {
     const link = e.target.closest('li');
     if (link?.classList.contains('nav__link')) {
-        lastLink && lastLink.classList.remove('selected');
-        lastLink = link;
-        link.classList.add('selected');
         e.preventDefault();
         const id = link.querySelector('a').getAttribute('href');
         document.querySelector(id).scrollIntoView({
@@ -27,7 +22,7 @@ slideMenu.addEventListener('click', (e) => {
 
 ////////////////////////////////////////////////////////////
 // Reveal Elements on Scroll
-const sections = document.querySelectorAll('section:not(:first-child)');
+const sections = document.querySelectorAll('section');
 let cards = [];
 
 sections.forEach((section) => {
@@ -37,9 +32,11 @@ sections.forEach((section) => {
 const revealSection = function (entries) {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            entry.target.querySelectorAll('div').forEach((card) => card.classList.remove('hide-card'))
+            entry.target.querySelectorAll('div').forEach((card) => card.classList.remove('hide-card'));
+            document.querySelector(`a[href="#${entry.target.id}"]`).closest('li').classList.add('selected')
         } else {
             entry.target.querySelectorAll('div').forEach((card) => card.classList.add('hide-card'))
+            document.querySelector(`a[href="#${entry.target.id}"]`).closest('li').classList.remove('selected')
         }
     })
 }
