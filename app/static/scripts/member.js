@@ -1,6 +1,5 @@
 ////////////////////////////////////////////////////////////
 // Hamburger Nav Menu
-let menuOpen = false;
 const burgerButton = document.querySelector('.burger-button');
 const menu = document.querySelector('.menu');
 
@@ -11,9 +10,9 @@ burgerButton.addEventListener('click', () => {
 const slideMenu = document.querySelector('.slide-menu');
 
 slideMenu.addEventListener('click', (e) => {
-    e.preventDefault();
     const link = e.target.closest('li');
     if (link?.classList.contains('nav__link')) {
+        e.preventDefault();
         const id = link.querySelector('a').getAttribute('href');
         document.querySelector(id).scrollIntoView({
             behavior: 'smooth'
@@ -23,7 +22,7 @@ slideMenu.addEventListener('click', (e) => {
 
 ////////////////////////////////////////////////////////////
 // Reveal Elements on Scroll
-const sections = document.querySelectorAll('section:not(:first-child)');
+const sections = document.querySelectorAll('section');
 let cards = [];
 
 sections.forEach((section) => {
@@ -33,9 +32,11 @@ sections.forEach((section) => {
 const revealSection = function (entries) {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            entry.target.querySelectorAll('div').forEach((card) => card.classList.remove('hide-card'))
+            entry.target.querySelectorAll('div').forEach((card) => card.classList.remove('hide-card'));
+            document.querySelector(`a[href="#${entry.target.id}"]`).closest('li').classList.add('selected')
         } else {
             entry.target.querySelectorAll('div').forEach((card) => card.classList.add('hide-card'))
+            document.querySelector(`a[href="#${entry.target.id}"]`).closest('li').classList.remove('selected')
         }
     })
 }
@@ -51,17 +52,12 @@ sections.forEach((section) => {
 
 ////////////////////////////////////////////////////////////
 // Map
-const colours = {
-    "juan": "violet",
-    "noah": "blue",
-    "malik": "orange"
-}
+
 
 let visited;
-const member = window.location.href.split('/').slice(-1)[0];
 
 const memberIcon = new L.Icon({
-    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${colours[member]}.png`,
+    iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png`,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -70,7 +66,7 @@ const memberIcon = new L.Icon({
 
 const map = L.map('map', { scrollWheelZoom: false }).setView([40, 0], 2.2);
 
-fetch(`/visited/${member}`)
+fetch(`/visited`)
     .then((res) => res.json())
     .then((data) => {
         visited = data.visited;

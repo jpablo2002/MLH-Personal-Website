@@ -85,36 +85,15 @@ nav {
     width: 100%;
     min-height: 5%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     position: fixed;
     z-index: 5;
     top: 0;
-    background-color: #000000;
+    background: #04121f;
     /* changed background */
     font-family: "Roboto", serif;
     font-weight: 700 !important;
     border-bottom: 2px solid white;
-}
-
-.members {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.members a {
-    text-decoration: none;
-    color: white;
-    height: 100%;
-    display: flex;
-    padding: 0px 25px;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.5s ease;
-}
-
-.members a:hover {
-    background-color: rgba(102, 102, 102, 0.9);
 }
 
 .slide-menu ul {
@@ -129,7 +108,6 @@ nav {
     width: 50px;
     height: 56px;
     cursor: pointer;
-    border: 2px solid white;
     border-bottom: none;
     border-right: none;
     transition: all 0.5s ease;
@@ -181,7 +159,6 @@ nav {
 .menu.open .burger-button {
     z-index: 5;
     border-radius: 50%;
-    background-color: rgba(173, 173, 173, 0.9);
 }
 
 .slide-menu {
@@ -191,7 +168,7 @@ nav {
     top: 0;
     right: -20%;
     color: white;
-    background-color: #000000;
+    background-color: rgba(88, 0, 155, 0.9);
     transition: right 0.5s ease;
     height: 100vh;
 }
@@ -241,7 +218,11 @@ nav {
 }
 
 .slide-menu li:not(:first-child):hover {
-    background-color: rgb(99, 94, 94);
+    background-color: rgb(192, 129, 223);
+}
+
+.slide-menu li.selected {
+    background-color: rgb(192, 129, 223);
 }
 
 .menu.open .slide-menu {
@@ -594,11 +575,7 @@ Projects Section Styling
 
 .project-info {
     position: absolute;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-    padding-top: calc(5% + 19px);
+    padding-top: calc(10% + 19px);
     text-align: center;
     height: 100%;
     top: 100%;
