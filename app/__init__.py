@@ -1,9 +1,10 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from dotenv import load_dotenv
 from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
+import re
 
 load_dotenv()
 app = Flask(__name__)
@@ -78,9 +79,36 @@ def visited(member='juan'):
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    # check name exists
+    try:
+        name = request.form['name']
+    except:
+        return Response("Invalid name: missing", status=400)
+    # check name isn't empty
+    if name == "":
+        return Response("Invalid name: empty", status=400)
+    
+    # check email exists
+    try:
+        email = request.form['email']
+    except:
+        return Response("Invalid email: missing", status=400)
+    # check email isn't empty
+    if email == "":
+        return Response("Invalid email: empty", status=400)
+    # check email is valid format (alphanumeric[.alphanumeric]@domain.name)
+    if '..' in email or re.search('[a-zA-Z0-9\.-]+@.+\..+', email) == None:
+        return Response("Invalid email: not an email", status=400)
+
+    # check content exists
+    try:
+        content = request.form['content']
+    except:
+        return Response("Invalid content: missing", status=400)
+    # check content isn't empty
+    if content == "":
+        return Response("Invalid content: empty", status=400)
+    
     timeline_post = TimelinePost.create(
         name=name, email=email, content=content)
 
