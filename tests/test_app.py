@@ -1,39 +1,83 @@
 import unittest
 import os
 os.environ['TESTING'] = 'true'
+from flask import template_rendered # signal to use to make sure templates are rendered with variables
 
 from app import app
+
+# context manager to determine which templates were rendered and what variables were passed to the template
+# the record function is attached to the template_rendered signal
+# adds a template to a list and returns that along with the variables used with that template
+def captured_templates(app, recorded, **extra):
+    def record(sender, template, context):
+        recorded.append((template, context))
+    return template_rendered.connected_to(record, app)
 
 class AppTestCase(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
 
     def test_home(self):
-        response = self.client.get("/")
-        assert response.status_code == 200
-        html = response.get_data(as_text=True)
-        assert "<title>Juan Acosta</title>" in html
+        templates = []
+        with captured_templates(app, templates):
+            response = app.test_client().get('/')
+            assert response.status_code == 200
 
-        # test homepage has about section
-        assert '<div class="about">' in html
+            # template tests
+            assert len(templates) == 1
+            template, context = templates[0]
 
-        # test homepage has education section 
-        assert '<div class="edu">' in html
+            self.assertIsNotNone(template.name)
+            assert template.name == 'juan.html'
 
-        # test homepage has work experience section
-        assert '<section class="experiences-container"' in html
+            template_vars = [
+                'title',
+                'name',
+                'university',
+                'member',
+                'linkedin',
+                'github',
+                'degree',
+                'years',
+                'activities',
+                'skills',
+                'about',
+                'seal',
+                'firstname',
+            ]
 
-        # test homepage has projects section
-        assert '<section class="projects-container"' in html
+            for var in template_vars:
+                assert context[var] != ''
 
-        # test homepage has skills section
-        assert '<section class="skills-container"' in html
+            html = response.get_data(as_text=True)
 
-        # test homepage has hobbies section
-        assert '<section class="hobbies-container"' in html
+            # test homepage has about section
+            assert '<div class="about">' in html
 
-        # test homepage has map section
-        assert '<section class="map"' in html
+            # test homepage has education section 
+            assert '<div class="edu">' in html
+
+            # test homepage has work experience section
+            assert '<section class="experiences-container"' in html
+
+            # test homepage has projects section
+            assert '<section class="projects-container"' in html
+
+            # test homepage has skills section
+            assert '<section class="skills-container"' in html
+
+            # test homepage has hobbies section
+            assert '<section class="hobbies-container"' in html
+
+            # test homepage has map section
+            assert '<section class="map"' in html
+
+            # test side menu (div) exists
+            assert '<div class="slide-menu">' in html
+
+            # test side menu has profile link (tags)
+            assert '<li class="nav__link"><a href="#profile">' in html
+
 
     def test_timeline(self):
         response = self.client.get("/api/timeline_post")
@@ -41,10 +85,8 @@ class AppTestCase(unittest.TestCase):
         assert response.is_json
         json = response.get_json()
         assert "timeline_posts" in json
-        try:
-            assert len(json["timeline_posts"]) == 0 # assuming we are using a clean db
-        except:
-            print("LENGTH NOT 0. Length is ", len(json["timeline_posts"]))
+        assert len(json["timeline_posts"]) == 0 # assuming we are using a clean db
+        # if ^ returns an error, likely means one of the other tests didn't work properly
         
         # test GET and POST endpoints
         response = self.client.post("/api/timeline_post", data={
@@ -52,35 +94,48 @@ class AppTestCase(unittest.TestCase):
             "email": "lwang5@villanova.edu", 
             "content": "How are you?"
         })
-        try:
-            assert response.status_code == 200
-        except:
-            print(response.status_code)
+        
+        assert response.status_code == 200
 
         response = self.client.get("/api/timeline_post")
         assert response.is_json
         json = response.get_json()
         assert "timeline_posts" in json
-        try:
-            assert len(json["timeline_posts"]) == 1
-        except:
-            print("LENGTH NOT 1. Length is ", len(json["timeline_posts"]))
+        assert len(json["timeline_posts"]) == 1
         assert json["timeline_posts"][0]["name"] == "Lucy Wang"
         assert json["timeline_posts"][0]["email"] == "lwang5@villanova.edu"
         assert json["timeline_posts"][0]["content"] == "How are you?"
 
         # more tests for timeline page
-        response = self.client.get("/timeline")
-        html = response.get_data(as_text=True)
-        assert "<title>Timeline</title>" in html
+        templates = []
+        with captured_templates(app, templates):
+            response = self.client.get("/timeline")
+            assert response.status_code == 200
 
-        # check the form and every input is there
-        assert '<form id="postForm">' in html
-        assert '<input type="text" id="name" name="name"' in html
-        assert '<input type="text" id="email" name="email"' in html
-        assert '<textarea name="content" id="content"' in html
-        assert '<button id="submit-post"><span>Submit</span></button>' in html
-        assert '<div id="timeline">' in html
+            # template tests
+            assert len(templates) == 1
+            template, context = templates[0]
+
+            self.assertIsNotNone(template.name)
+            assert template.name == 'timeline.html'
+
+            template_vars = [
+                'title',
+            ]
+            for var in template_vars:
+                assert context[var] != ''
+
+            html = response.get_data(as_text=True)
+
+            # check the form and every input is there
+            assert '<form id="postForm">' in html
+            assert '<input type="text" id="name" name="name"' in html
+            assert '<input type="text" id="email" name="email"' in html
+            assert '<textarea name="content" id="content"' in html
+            assert '<button id="submit-post"><span>Submit</span></button>' in html
+
+            # check the timeline div is there
+            assert '<div id="timeline">' in html
 
     def test_malformed_timeline_post(self):
         # POST request missing name
@@ -91,8 +146,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid name: missing" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid name: missing" in response_text
 
         # POST request empty name
         response  = self.client.post("/api/timeline_post", data=
@@ -103,8 +158,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid name: empty" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid name: empty" in response_text
 
         # POST request with missing content
         response  = self.client.post("/api/timeline_post", data=
@@ -114,8 +169,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid content: missing" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid content: missing" in response_text
         
         # POST request with empty content
         response  = self.client.post("/api/timeline_post", data=
@@ -126,8 +181,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid content: empty" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid content: empty" in response_text
 
         # POST request with missing email
         response  = self.client.post("/api/timeline_post", data=
@@ -137,8 +192,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid email: missing" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid email: missing" in response_text
 
         # POST request with empty email
         response  = self.client.post("/api/timeline_post", data=
@@ -149,8 +204,8 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid email: empty" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid email: empty" in response_text
 
         # POST request with malformed email
         response  = self.client.post("/api/timeline_post", data=
@@ -161,5 +216,6 @@ class AppTestCase(unittest.TestCase):
             }
         )
         assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid email: not an email" in html
+        response_text = response.get_data(as_text=True)
+        assert "Invalid email: not an email" in response_text
+
