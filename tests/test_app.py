@@ -75,8 +75,24 @@ class AppTestCase(unittest.TestCase):
             # test side menu (div) exists
             assert '<div class="slide-menu">' in html
 
-            # test side menu has profile link (tags)
-            assert '<li class="nav__link"><a href="#profile">' in html
+            # test side menu has nav links
+            nav_links = [
+                'profile',
+                'about-edu',
+                'experiences',
+                'projects',
+                'skills',
+                'hobbies',
+                'locations',
+            ]
+            for link in nav_links:
+                assert '<li class="nav__link"><a href="#' + link + '">' in html
+
+            page_links = [
+                'timeline',
+            ]
+            for link in page_links:
+                assert '<li class="page__link"><a href="/' + link + '">' in html
 
 
     def test_timeline(self):
