@@ -40,6 +40,8 @@ class TestTimelinePost(unittest.TestCase):
 
         assert first_post.id == 1
         assert second_post.id == 2
+        self.assertIsNotNone(first_post.created_at)
+        self.assertIsNotNone(second_post.created_at)
 
         posts = TimelinePost.select()
         posts = [
