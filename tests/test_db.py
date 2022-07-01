@@ -31,7 +31,7 @@ class TestTimelinePost(unittest.TestCase):
             name="Lucy Wang", 
             email="lwang5@villanova.edu",
             content="Test posting to timeline DB"
-            )
+        )
         second_post = TimelinePost.create(
             name="Billy Bob",
             email="bob@gmail.com",
@@ -49,7 +49,7 @@ class TestTimelinePost(unittest.TestCase):
                 'email': post.email,
                 'content': post.content
             } for post in posts
-            ]
+        ]
 
         assert posts == [
             {
