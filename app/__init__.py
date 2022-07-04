@@ -96,8 +96,8 @@ def post_time_line_post():
     # check email isn't empty
     if email == "":
         return "Invalid email: empty", 400
-    # check email is valid format (alphanumeric[.alphanumeric]@domain.name)
-    if '..' in email or re.search('[a-zA-Z0-9\.-]+@.+\..+', email) == None:
+    # check email is valid format (alphanumeric[.alphanumeric]@alphanumeric[.alphanumeric])
+    if '..' in email or re.search('[a-zA-Z0-9\.-]+@[a-zA-Z0-9\.-]+', email) == None:
         return "Invalid email: not an email", 400
 
     # check content exists
