@@ -4,16 +4,22 @@ from dotenv import load_dotenv
 from peewee import *
 import datetime
 from playhouse.shortcuts import model_to_dict
+import re
 
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-                     user=os.getenv("MYSQL_USER"),
-                     password=os.getenv("MYSQL_PASSWORD"),
-                     host=os.getenv("MYSQL_HOST"),
-                     port=3306
-                     )
+# use in-memory sqlite db if in testing mode so we aren't dependent on a mysql instance for testing
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+                        user=os.getenv("MYSQL_USER"),
+                        password=os.getenv("MYSQL_PASSWORD"),
+                        host=os.getenv("MYSQL_HOST"),
+                        port=3306
+                        )
 
 print(mydb)
 
@@ -73,9 +79,36 @@ def visited(member='juan'):
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    # check name exists
+    try:
+        name = request.form['name']
+    except:
+        return "Invalid name: missing", 400
+    # check name isn't empty
+    if name == "":
+        return "Invalid name: empty", 400
+    
+    # check email exists
+    try:
+        email = request.form['email']
+    except:
+        return "Invalid email: missing", 400
+    # check email isn't empty
+    if email == "":
+        return "Invalid email: empty", 400
+    # check email is valid format (alphanumeric[.alphanumeric]@alphanumeric[.alphanumeric])
+    if '..' in email or re.search('[a-zA-Z0-9\.-]+@[a-zA-Z0-9\.-]+', email) == None:
+        return "Invalid email: not an email", 400
+
+    # check content exists
+    try:
+        content = request.form['content']
+    except:
+        return "Invalid content: missing", 400
+    # check content isn't empty
+    if content == "":
+        return "Invalid content: empty", 400
+    
     timeline_post = TimelinePost.create(
         name=name, email=email, content=content)
 
