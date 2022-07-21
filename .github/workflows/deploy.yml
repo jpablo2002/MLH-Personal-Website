@@ -58,6 +58,7 @@ jobs:
       - name: Discord Deployment Status Message
         if: ${{ failure() }}
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"
+      - name: Discord Deployment Status Failed Message
         if: ${{ !failure() }}
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
       
