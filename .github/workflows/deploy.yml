@@ -55,11 +55,9 @@ jobs:
         run: ssh my-vps '~/redeploy-site.sh'
       - name: Print Container Status
         run: docker-compose ps
-      
       - name: Discord Deployment Status Message
         if: ${{ failure() }}
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚨 Deployment Failed"
         if: ${{ !failure() }}
         run: curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
       
-        
