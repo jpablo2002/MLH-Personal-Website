@@ -1,14 +1,10 @@
-# **Boisterous Baboons Portfolio Site**
+# **MLH Personal Website**
 
-This portfolio website allows users to learn more about the members of Boisterous Baboons, such as about each member's education, work experience, projects, skills, hobbies, and travel experiences.
+This portfolio website allows users to learn more about Juan Pablo Acosta, including his education, work experience, projects, skills, hobbies, and travel experiences.
 
-## Our Stack
+## My Stack
 
-This website was built using HTML, Jinja2, CSS, and Javascript on the front-end, and the back-end was built using Python and Flask. We also used the particles.js and leaflet.js frameworks to add some of the design features.
-
-## Demo
-
-[Watch Our Demo on YouTube!](https://youtu.be/y-RejqP_u1c)
+This website was built using HTML, Jinja2, CSS, and Javascript on the front-end, and the back-end was built using Python and Flask. I also used the particles.js and leaflet.js frameworks to add some of the design features.
 
 ## Getting Started
 
